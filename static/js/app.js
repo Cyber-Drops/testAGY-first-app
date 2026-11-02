@@ -48,6 +48,7 @@ const elements = {
   copyBtnText: document.getElementById('copyBtnText'),
   openTwitterBtn: document.getElementById('openTwitterBtn'),
   toast: document.getElementById('toast'),
+  scrollTopBtn: document.getElementById('scrollTopBtn'),
 };
 
 /**
@@ -157,6 +158,22 @@ function setupEventListeners() {
     const customText = elements.tweetTextarea.value.trim();
     const url = elements.tweetPreviewLink.href;
     executeTwitterIntent(customText, url);
+  });
+
+  // Scroll to top button behavior
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      elements.scrollTopBtn.classList.add('visible');
+    } else {
+      elements.scrollTopBtn.classList.remove('visible');
+    }
+  }, { passive: true });
+
+  elements.scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   });
 
   // Keyboard shortcut Esc to close modal
